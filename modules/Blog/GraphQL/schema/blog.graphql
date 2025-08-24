@@ -62,4 +62,5 @@ input ArticleInput{
 
 extend type Query {
     blog(input: ArticleInput @spread): Article! @field(resolver: "Modules\\Blog\\GraphQL\\Queries\\Blog")
+    blogs(input: ArticlesInput @spread): ArticleList! @field(resolver: "Modules\\Blog\\GraphQL\\Queries\\Blogs")
 }
