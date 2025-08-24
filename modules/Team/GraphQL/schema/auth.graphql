@@ -1,0 +1,80 @@
+type User {
+    id: ID
+    name: String
+    last_name: String
+    email: String
+    phone: String
+    image: String
+    city: String
+    address: String
+}
+
+type LoginResponse {
+    user: User
+    token: String
+}
+
+input RegisterInput {
+    name: String!
+    last_name: String!
+    email: String!
+    phone: String!
+    password: String!
+    password_confirmation: String!
+    i_agree: Boolean
+}
+
+input UpdatePersonalDataInput {
+    tmp_image_id: Int
+    name: String
+    last_name: String
+    email: String
+    phone: String
+    password: String
+    city: String
+    address: String
+}
+
+input LoginInput {
+    email: String @rules(apply: ["required", "string", "email", "max:255"])
+    password: String @rules(apply: ["required", "string", "max:255"])
+}
+
+input GoogleAuthInput {
+    token: String! @rules(apply: [ "required", "string"])
+}
+
+input ResetPasswordInput {
+    email: String @rules(apply: [ "required", "string", "email", "max:255"])
+    url: String
+}
+
+input NotificationSettingsInput {
+    receive_offers: Boolean
+}
+
+input ChangePasswordInput {
+    password: String!
+    password_confirmation: String!
+}
+
+input NewPasswordInput {
+    token: String
+    password: String! @rules(apply: ["required", "string", "max:255"])
+    password_confirmation: String! @rules(apply: ["required", "string", "max:255"])
+}
+
+extend type Query {
+    getUser: User @field(resolver: "Modules\\Team\\GraphQL\\Queries\\Settings\\UserProfile") @guard
+}
+
+extend type Mutation {
+    register(input: RegisterInput @spread): LoginResponse @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Auth\\Register")
+    login(input: LoginInput @spread): LoginResponse @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Auth\\Login")
+    logout: Response @guard @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Auth\\Logout")
+    resetPassword(input: ResetPasswordInput! @spread): Response @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Auth\\ResetPassword")
+    setNewPassword(input: NewPasswordInput! @spread): LoginResponse @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Auth\\SetNewPassword")
+
+    updatePersonalData(input: UpdatePersonalDataInput @spread): User @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Settings\\UpdatePersonalData") @guard
+    deleteAccount: Response @field(resolver: "Modules\\Team\\GraphQL\\Mutations\\Settings\\DeleteAccount") @guard
+}

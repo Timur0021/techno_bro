@@ -1,0 +1,6 @@
+#import types.graphql
+#import ../modules/SiteSettings/GraphQL/schema/settings.graphql
+#import ../modules/Pages/GraphQL/schema/pages.graphql
+#import ../modules/Blocks/GraphQL/schema/blocks.graphql
+#import ../modules/Blog/GraphQL/schema/blog.graphql
+#import ../modules/Team/GraphQL/schema/auth.graphql
