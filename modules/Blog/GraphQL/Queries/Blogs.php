@@ -3,6 +3,7 @@
 namespace Modules\Blog\GraphQL\Queries;
 
 use Error;
+use Modules\Blog\Models\Blog as BlogModel;
 
 class Blogs
 {
