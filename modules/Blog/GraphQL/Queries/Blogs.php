@@ -15,7 +15,14 @@ class Blogs
     public function __invoke(null $_, array $args)
     {
         try {
-            dd('soon');
+            $blogs = BlogModel::query()
+                 ->where('active', true)
+                 ->latest('created_at')
+                 ->get();
+
+            return [
+                'data' => $blogs,
+            ];
         } catch (Error $error) {
             throw new Error($error->getMessage());
         }
