@@ -6,6 +6,7 @@ type Response {
     status: String
     message: String
 }
+
 type PaginatorInfo {
     "Index of the current page."
     currentPage: Int
