@@ -8,4 +8,5 @@ return [
     \Modules\SiteSettings\Providers\SiteSettingsServiceProvider::class,
     \Modules\Team\Providers\TeamServiceProvider::class,
     \Modules\Blog\Providers\BlogServiceProvider::class,
+    \Modules\Products\Providers\ProductsServiceProvider::class,
 ];
