@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Team\Providers;
+namespace Modules\Products\Providers;
 
 use Filament\Facades\Filament;
 use Illuminate\Support\ServiceProvider;
