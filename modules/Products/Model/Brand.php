@@ -29,7 +29,7 @@ class Brand extends Model implements HasMedia
         'name',
     ];
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
