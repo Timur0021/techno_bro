@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Modules\Products\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,10 +14,10 @@ use Spatie\Translatable\HasTranslations;
 class Category extends Model implements HasMedia
 {
     use HasSlug;
-    use InteractWithMedia;
+    use InteractsWithMedia;
     use HasTranslations;
 
-    protected $table = "category";
+    protected $table = "categories";
 
     protected $fillable = [
         'name',
@@ -33,7 +33,7 @@ class Category extends Model implements HasMedia
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
             ->usingLanguage('en')
             ->doNotGenerateSlugsOnUpdate();

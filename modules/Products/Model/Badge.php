@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Modules\Products\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,13 +11,13 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
-class Badeges extends Model implements HasMedia
+class Badge extends Model implements HasMedia
 {
     use HasSlug;
-    use InteractWithMedia;
+    use InteractsWithMedia;
     use HasTranslations;
 
-    protected $table = "badages";
+    protected $table = "badges";
 
     protected $fillable = [
         'name',
@@ -29,6 +29,14 @@ class Badeges extends Model implements HasMedia
         'name',
     ];
 
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage('en')
+            ->doNotGenerateSlugsOnUpdate();
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

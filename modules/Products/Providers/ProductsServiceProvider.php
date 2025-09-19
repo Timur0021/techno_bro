@@ -5,7 +5,6 @@ namespace Modules\Products\Providers;
 use Filament\Facades\Filament;
 use Illuminate\Support\ServiceProvider;
 
-
 class ProductsServiceProvider extends ServiceProvider
 {
     public function boot(): void
@@ -14,7 +13,7 @@ class ProductsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @throws DefinitionException
+     * @throws
      */
     public function register(): void
     {
