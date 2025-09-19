@@ -1,0 +1,21 @@
+type Category {
+    name: String
+    slug: String
+    description: String
+    image: String
+    active: Boolean
+}
+
+type Badge {
+    name: String
+    color: String
+    image: String
+    active: String
+}
+
+type Brand {
+    name: String
+    slug: String
+    image: String
+    active: String
+}
