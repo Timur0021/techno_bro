@@ -21,4 +21,4 @@ class ProductsServiceProvider extends ServiceProvider
         $panel = Filament::getPanels()['admin'];
         $panel->discoverResources(in: base_path('modules/Products/Filament/Resources'), for: 'Modules\\Products\\Filament\\Resources');
     }
-} 
+}
