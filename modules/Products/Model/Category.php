@@ -17,7 +17,6 @@ class Category extends Model implements HasMedia
     use InteractWithMedia;
     use HasTranslations;
 
-
     protected $table = "category";
 
     protected $fillable = [

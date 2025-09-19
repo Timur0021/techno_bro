@@ -17,7 +17,6 @@ class Brand extends Model implements HasMedia
     use InteractWithMedia;
     use HasTranslations;
 
-
     protected $table = "brands";
 
     protected $fillable = [

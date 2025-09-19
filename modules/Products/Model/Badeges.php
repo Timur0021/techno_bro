@@ -17,7 +17,6 @@ class Badeges extends Model implements HasMedia
     use InteractWithMedia;
     use HasTranslations;
 
-
     protected $table = "badages";
 
     protected $fillable = [
