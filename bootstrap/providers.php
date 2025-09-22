@@ -9,5 +9,4 @@ return [
     \Modules\Team\Providers\TeamServiceProvider::class,
     \Modules\Blog\Providers\BlogServiceProvider::class,
     \Modules\Products\Providers\ProductsServiceProvider::class,
-    \Modules\NotificationsProviders\NotificationsServiceProvider::class,
 ];

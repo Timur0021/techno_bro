@@ -19,4 +19,11 @@ class ListArticle extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ArticleResource\Widgets\ArticlesTableColumnsOrder::class,
+        ];
+    }
 }

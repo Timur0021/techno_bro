@@ -2,6 +2,7 @@
 
 namespace Modules\Blog\Filament\Resources;
 
+use App\Models\ColumnSetting;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -15,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use FilamentTiptapEditor\TiptapEditor;
@@ -133,38 +135,87 @@ class ArticleResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $columnOrder = ColumnSetting::query()
+            ->where('key', 'articles_table_columns')
+            ->value('value') ?? [
+                'id',
+                'image',
+                'title',
+                'views_count',
+                'categories.name',
+                'active',
+                'published_at'
+            ];
+
+        $allColumns = [
+            'id' => TextColumn::make('id')->label('ID')
+                ->sortable()
+                ->searchable(),
+            'image' => SpatieMediaLibraryImageColumn::make('image')
+                ->label('Фото')
+                ->collection('image')
+                ->conversion('webp'),
+            'title' => TextColumn::make('title')
+                ->label('Назва')
+                ->searchable(query: function ($query, $search) {
+                    $query->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($search) . '%']);
+                })->limit(50),
+            'views_count' => TextColumn::make('views_count')
+                ->searchable()
+                ->label('Перегляди'),
+            'categories.name' => TextColumn::make('categories.name')
+                ->label('Категорія')
+                ->getStateUsing(fn($record) => $record->categories->first()?->name ?? 'Без категорії')
+                ->sortable(),
+            'active' => ToggleColumn::make('active')
+                ->searchable()
+                ->label('Статус'),
+            'published_at' => TextColumn::make('published_at')
+                ->label('Опубліковано')
+                ->date()
+                ->sortable(),
+        ];
+
+        $columns = [];
+        foreach ($columnOrder as $key) {
+            if (isset($allColumns[$key])) {
+                $columns[] = $allColumns[$key];
+            }
+        }
+
         return $table
             ->defaultSort('published_at', 'desc')
             ->defaultPaginationPageOption(25)
-            ->columns([
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->sortable()
-                    ->searchable(),
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->label('Фото')
-                    ->collection('image')
-                    ->conversion('webp'),
-                TextColumn::make('title')
-                    ->label('Назва')
-                    ->searchable(query: function ($query, $search) {
-                        $query->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($search) . '%']);
-                    })->limit(50),
-                TextColumn::make('views_count')
-                    ->searchable()
-                    ->label('Перегляди'),
-                TextColumn::make('categories.name')
-                    ->label('Категорія')
-                    ->getStateUsing(fn($record) => $record->categories->first()?->name ?? 'Без категорії')
-                    ->sortable(),
-                Tables\Columns\ToggleColumn::make('active')
-                    ->searchable()
-                    ->label('Статус'),
-                TextColumn::make('published_at')
-                    ->label('Опубліковано')
-                    ->date()
-                    ->sortable(),
-            ])
+            ->columns($columns)
+//            ->columns([
+//                TextColumn::make('id')
+//                    ->label('ID')
+//                    ->sortable()
+//                    ->searchable(),
+//                SpatieMediaLibraryImageColumn::make('image')
+//                    ->label('Фото')
+//                    ->collection('image')
+//                    ->conversion('webp'),
+//                TextColumn::make('title')
+//                    ->label('Назва')
+//                    ->searchable(query: function ($query, $search) {
+//                        $query->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($search) . '%']);
+//                    })->limit(50),
+//                TextColumn::make('views_count')
+//                    ->searchable()
+//                    ->label('Перегляди'),
+//                TextColumn::make('categories.name')
+//                    ->label('Категорія')
+//                    ->getStateUsing(fn($record) => $record->categories->first()?->name ?? 'Без категорії')
+//                    ->sortable(),
+//                Tables\Columns\ToggleColumn::make('active')
+//                    ->searchable()
+//                    ->label('Статус'),
+//                TextColumn::make('published_at')
+//                    ->label('Опубліковано')
+//                    ->date()
+//                    ->sortable(),
+//            ])
             ->filters([
                 SelectFilter::make('category_id')
                     ->label('Категорії')
