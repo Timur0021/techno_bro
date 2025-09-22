@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e7aef777465c25accc311f6f1b7301b",
+    "content-hash": "4041dc4c8dc6266385d6722e1ee847aa",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -10571,6 +10571,60 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.3.0"
             },
             "time": "2024-12-21T16:25:41+00:00"
+        },
+        {
+            "name": "tima/filament-column-order",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Timur0021/filament-column-order.git",
+                "reference": "544aebcb8a323ce077074434da74b47cc583581a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Timur0021/filament-column-order/zipball/544aebcb8a323ce077074434da74b47cc583581a",
+                "reference": "544aebcb8a323ce077074434da74b47cc583581a",
+                "shasum": ""
+            },
+            "require": {
+                "filament/actions": "^3.3",
+                "filament/forms": "^3.3",
+                "filament/notifications": "^3.3",
+                "filament/support": "^3.3",
+                "filament/tables": "^3.3",
+                "filament/widgets": "^3.3",
+                "illuminate/database": ">=11.0",
+                "illuminate/support": ">=11.0",
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tima\\FilamentColumnOrder\\ColumnOrderServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tima\\FilamentColumnOrder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Timur0021"
+                }
+            ],
+            "description": "Reusable Filament widget for saving/reordering table columns",
+            "support": {
+                "issues": "https://github.com/Timur0021/filament-column-order/issues",
+                "source": "https://github.com/Timur0021/filament-column-order/tree/1.0.0"
+            },
+            "time": "2025-09-22T19:20:51+00:00"
         },
         {
             "name": "ueberdosis/tiptap-php",
