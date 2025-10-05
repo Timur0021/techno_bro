@@ -13,7 +13,6 @@ use Spatie\Translatable\HasTranslations;
 
 class Badge extends Model implements HasMedia
 {
-    use HasSlug;
     use InteractsWithMedia;
     use HasTranslations;
 
@@ -28,15 +27,6 @@ class Badge extends Model implements HasMedia
     public array $translatable = [
         'name',
     ];
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug')
-            ->usingLanguage('en')
-            ->doNotGenerateSlugsOnUpdate();
-    }
 
     public function registerMediaConversions(Media $media = null): void
     {
