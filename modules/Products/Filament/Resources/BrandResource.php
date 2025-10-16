@@ -60,7 +60,13 @@ class BrandResource extends Resource
                                     return true;
                                 }
                             })
-                            ->required(),])->columns(2),
+                            ->required(),
+                        TinyEditor::make('description')
+                            ->label('Опис')
+                            ->profile('default')
+                            ->columnSpanFull()
+                            ->required(),
+                    ])->columns(2),
                 Group::make()->schema([
                     Section::make('Статус')
                         ->schema([

@@ -37,7 +37,7 @@ class BadgeResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Бейджі';
 
-    protected static ?int $navigationSort = 14;
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $navigationLabel = 'Бейджі';
 
@@ -59,7 +59,7 @@ class BadgeResource extends Resource
                             ->columnSpanFull()
                             ->rgba()
                             ->required(),
-                          ])->columns(2),
+                          ])->columns(1),
                 Group::make()->schema([
                     Section::make('Статус')
                         ->schema([
