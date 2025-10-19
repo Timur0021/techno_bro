@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Modules\Notifications\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,7 +11,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Notifications extends Model implements HasMedia
 {
-    use InteractWithMedia;
+    use InteractsWithMedia;
     use HasTranslations;
 
 
@@ -33,5 +33,12 @@ class Notifications extends Model implements HasMedia
     {
         $this->addMediaConversion('webp')
             ->format('webp')->nonQueued();
+    }
+
+    public function getImageAttribute(): array|null|string
+    {
+        return $this->getMedia('image')->map(function ($mediaObject) {
+            return $mediaObject->getUrl();
+        })->toArray()[0] ?? null;
     }
 }
