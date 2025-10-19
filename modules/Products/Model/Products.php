@@ -1,46 +1,31 @@
 <?php
 
-namespace Modules\Products\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
-class Brand extends Model implements HasMedia
+class Products extends Model
 {
-    use HasSlug;
-    use InteractsWithMedia;
+    use InteractWithMedia;
     use HasTranslations;
 
-    protected $table = "brands";
+    protected $table = "products";
 
     protected $fillable = [
         'name',
         'description',
-        'slug',
         'active',
     ];
 
     public array $translatable = [
         'name',
-        'description',
     ];
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug')
-            ->usingLanguage('en')
-            ->doNotGenerateSlugsOnUpdate();
-    }
-
-    public function registerMediaConversions(Media $media = null): void
+        public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('webp')
             ->format('webp')->nonQueued();
@@ -52,4 +37,5 @@ class Brand extends Model implements HasMedia
             return $mediaObject->getUrl();
         })->toArray()[0] ?? null;
     }
+
 }
