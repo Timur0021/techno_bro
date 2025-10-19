@@ -1,0 +1,7 @@
+type Notification {
+    id: ID
+    title: String
+    body: String
+    read_at: DateTime
+    active: Boolean
+}
