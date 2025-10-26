@@ -4,3 +4,5 @@
 #import ../modules/Blocks/GraphQL/schema/blocks.graphql
 #import ../modules/Blog/GraphQL/schema/blog.graphql
 #import ../modules/Team/GraphQL/schema/auth.graphql
+#import ../modules/Products/GraphQL/schema/products.graphql
+#import ../modules/Notifications/GraphQL/Notifications.graphql

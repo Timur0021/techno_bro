@@ -19,3 +19,9 @@ type Brand {
     image: String
     active: String
 }
+type Product {
+    id: ID
+    name: String
+    description: String
+    active: Boolean
+}
